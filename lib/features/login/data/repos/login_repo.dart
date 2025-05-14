@@ -1,3 +1,4 @@
+import 'package:doctor/core/networking/api_error_handler.dart';
 import 'package:doctor/core/networking/api_result.dart';
 import 'package:doctor/features/login/data/data_sources/login_api_service.dart';
 import 'package:doctor/features/login/data/models/login_request_body.dart';
@@ -13,8 +14,8 @@ class LoginRepo {
     try {
       final response = await _loginApiService.login(loginRequestBody);
       return ApiResult.success(response);
-    } catch (e) {
-      return ApiResult.failure(e.toString());
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
 }
