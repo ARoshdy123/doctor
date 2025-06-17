@@ -3,17 +3,19 @@ import 'package:doctor/core/theming/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
 class AppTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final InputBorder? focusedBorder;
   final InputBorder? enabledBorder;
   final TextStyle? inputTextStyle;
   final TextStyle? labelStyle;
+
   final Widget? suffixIcon;
   final bool? isObscureText;
   final Color? backgroundColor;
   final String labelText;
+  final TextEditingController? controller;
+  final Function(String?) validator;
   const AppTextFormField({
     super.key,
     this.contentPadding,
@@ -25,11 +27,14 @@ class AppTextFormField extends StatelessWidget {
     this.isObscureText,
     required this.labelText,
     this.backgroundColor,
+    this.controller,
+    required this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         filled: true,
         isDense: true,
@@ -51,6 +56,14 @@ class AppTextFormField extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(16),
             ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: ColorsManager.red, width: 1.3),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: ColorsManager.red, width: 1.3),
+          borderRadius: BorderRadius.circular(16),
+        ),
         labelText: labelText,
         labelStyle: labelStyle ?? TextStyles.font14LightGrayRegular,
         suffixIcon: suffixIcon,
@@ -60,6 +73,7 @@ class AppTextFormField extends StatelessWidget {
       obscureText: isObscureText ?? false,
 
       style: TextStyles.font14DarkBlueMedium,
+      validator: (value) => validator(value),
     );
   }
 }
