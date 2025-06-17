@@ -1,3 +1,4 @@
+import 'package:doctor/core/helpers/app_regax.dart';
 import 'package:doctor/core/helpers/spacing.dart';
 import 'package:doctor/core/theming/colors.dart';
 import 'package:doctor/core/widgets/app_text_form_field.dart';
@@ -17,12 +18,32 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool isObscureText = true;
   late TextEditingController emailController;
   late TextEditingController passwordController;
+  bool hasLowerCase = false;
+  bool hasUpperCase = false;
+  bool hasNumber = false;
+  bool hasSpecialCharacter = false;
+  bool hasMinLength = false;
 
   @override
   void initState() {
     super.initState();
     emailController = context.read<LoginCubit>().emailController;
     passwordController = context.read<LoginCubit>().passwordController;
+    setupPasswordControllerListeners();
+  }
+
+  void setupPasswordControllerListeners() {
+    passwordController.addListener(() {
+      setState(() {
+        hasLowerCase = AppRegex.hasLowerCase(passwordController.text);
+        hasUpperCase = AppRegex.hasUpperCase(passwordController.text);
+        hasNumber = AppRegex.hasNumber(passwordController.text);
+        hasSpecialCharacter = AppRegex.hasSpecialCharacter(
+          passwordController.text,
+        );
+        hasMinLength = AppRegex.hasMinLength(passwordController.text);
+      });
+    });
   }
 
   @override
@@ -34,7 +55,9 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           AppTextFormField(
             labelText: 'Email',
             validator: (value) {
-              if (value == null || value.isEmpty) {
+              if (value == null ||
+                  value.isEmpty ||
+                  !AppRegex.isEmailValid(value)) {
                 return 'Please enter your email';
               }
             },
@@ -63,9 +86,22 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             },
           ),
           verticalSpace(24),
-          PasswordValidation(),
+          PasswordValidation(
+            hasLowerCase: hasLowerCase,
+            hasUpperCase: hasUpperCase,
+            hasNumber: hasNumber,
+            hasSpecialCharacter: hasSpecialCharacter,
+            hasMinLength: hasMinLength,
+          ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

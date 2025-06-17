@@ -6,6 +6,8 @@ import 'package:doctor/features/onboarding/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/home/ui/home_screen.dart';
+
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
     // this is argument to be passed in any screen like this (arguments: 'class name')
@@ -14,7 +16,7 @@ class AppRouter {
     switch (settings.name) {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
-      case '/login':
+      case Routes.loginScreen:
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider(
@@ -26,6 +28,9 @@ class AppRouter {
       // return MaterialPageRoute(builder: (_) => RegisterScreen());
       case '/profile':
       // return MaterialPageRoute(builder: (_) => ProfileScreen());
+      case Routes.homeScreen:
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
+
       default:
         return MaterialPageRoute(
           builder:
