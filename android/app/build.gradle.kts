@@ -29,16 +29,19 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
-    flavorDimensions "default"
+
+    flavorDimensions += "default"
+
     productFlavors {
-        production {
-            dimension "default"
-            resValue "string", "app_name", "Doc Production"
+        create("development") {
+            dimension = "default"
+            resValue("string", "app_name", "Doctor Development")
+            applicationIdSuffix = ".development"
         }
-        development {
-            dimension "default"
-            applicationIdSuffix ".dev"
-            resValue "string", "app_name", "Doc Development"
+        create("production") {
+            dimension = "default"
+            resValue("string", "app_name", "Doctor")
+            applicationIdSuffix = ".production"
         }
     }
 
