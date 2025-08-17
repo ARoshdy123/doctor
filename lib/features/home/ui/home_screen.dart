@@ -1,6 +1,7 @@
 import 'package:doctor/core/theming/colors.dart';
 import 'package:flutter/material.dart';
 
+import 'widgets/doctor_banner.dart';
 import 'widgets/home_top_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,18 +11,17 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.white,
-      body: SafeArea(child: Container(
-        width: double.infinity,
-        margin: EdgeInsets.fromLTRB(20, 16, 20, 20),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+      body: SafeArea(
+        child: Container(
+          width: double.infinity,
+          margin: EdgeInsets.fromLTRB(20, 16, 20, 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
 
-          children: [
-            const HomeTopBar(),
-            Text('Homepageeeeeeeeeeeeeeeeeee'),
-          ],
+            children: [const HomeTopBar(), const DoctorBanner()],
+          ),
         ),
-        
-      ))
+      ),
     );
   }
 }
