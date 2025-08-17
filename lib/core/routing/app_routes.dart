@@ -18,6 +18,7 @@ class AppRouter {
     switch (settings.name) {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(builder: (_) => const OnboardingScreen());
+
       case Routes.loginScreen:
         return MaterialPageRoute(
           builder:
@@ -34,7 +35,6 @@ class AppRouter {
                 child: const SignupScreen(),
               ),
         );
-      // return MaterialPageRoute(builder: (_) => RegisterScreen());
       case '/profile':
       // return MaterialPageRoute(builder: (_) => ProfileScreen());
       case Routes.homeScreen:
