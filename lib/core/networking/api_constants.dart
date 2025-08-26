@@ -5,6 +5,9 @@ class ApiConstants {
   static const String logoutEndpoint = 'auth/logout';
   static const String userProfileEndpoint = 'user/profile';
   static const String updateProfileEndpoint = 'user/update';
+  static const String homeEndpoint = 'home/index';
+  static const String getSpecializationEndpoint = 'specialization/index';
+  static const String showSpecializationEndpoint = 'specialization/show/1';
 }
 
 class ApiErrors {
