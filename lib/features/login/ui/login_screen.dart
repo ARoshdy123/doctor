@@ -1,3 +1,4 @@
+import 'package:doctor/core/helpers/responsive_helper.dart';
 import 'package:doctor/core/helpers/spacing.dart';
 import 'package:doctor/core/theming/styles.dart';
 import 'package:doctor/core/widgets/app_text_button.dart';
@@ -7,7 +8,6 @@ import 'package:doctor/features/login/ui/widgets/email_and_password.dart';
 import 'package:doctor/features/login/ui/widgets/terms_and_conditions_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'widgets/login_bloc_listener.dart';
 
@@ -19,7 +19,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+          padding: EdgeInsets.symmetric(horizontal: 30.rw, vertical: 30.rh),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,12 +72,11 @@ void validateThenDoLogin(BuildContext context) {
     context.read<LoginCubit>().emitLoginState();
   }
 }
-  // if (context.read<LoginCubit>().formKey.currentState!.validate()) {
-  //   context.read<LoginCubit>().emitLoginState(
-  //     LoginRequestBody(
-  //       email: context.read<LoginCubit>().emailController.text,
-  //       password: context.read<LoginCubit>().passwordController.text,
-  //     ),
-  //   );
-  // }
-
+// if (context.read<LoginCubit>().formKey.currentState!.validate()) {
+//   context.read<LoginCubit>().emitLoginState(
+//     LoginRequestBody(
+//       email: context.read<LoginCubit>().emailController.text,
+//       password: context.read<LoginCubit>().passwordController.text,
+//     ),
+//   );
+// }
