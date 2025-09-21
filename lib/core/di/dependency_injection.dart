@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:doctor/core/networking/dio_factory.dart';
+import 'package:doctor/features/home/data/data_sources/home_api_service.dart';
+import 'package:doctor/features/home/data/repos/home_repo.dart';
 import 'package:doctor/features/login/data/data_sources/login_api_service.dart';
 import 'package:doctor/features/login/data/repos/login_repo.dart';
 import 'package:doctor/features/login/logic/cubit/login_cubit.dart';
@@ -18,9 +20,17 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<SignUpApiService>(() => SignUpApiService(dio));
 
   //login
-  getIt.registerLazySingleton<LoginRepo>(() => LoginRepo(getIt())); //create noskha whda for all app (dispose will lead crash)
-  getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt())); // kool ma ahtgha create noskha gdeda
+  getIt.registerLazySingleton<LoginRepo>(
+    () => LoginRepo(getIt()),
+  ); //create noskha whda for all app (dispose will lead crash)
+  getIt.registerFactory<LoginCubit>(
+    () => LoginCubit(getIt()),
+  ); // kool ma ahtgha create noskha gdeda
   //Register
   getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo(getIt()));
   getIt.registerFactory<SignUpCubit>(() => SignUpCubit(getIt()));
+  //Home
+  getIt.registerLazySingleton<HomeApiService>(() => HomeApiService(dio));
+  getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
+  // getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
 }

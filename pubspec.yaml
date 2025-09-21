@@ -60,6 +60,9 @@ dependencies:
   flutter_native_splash: ^2.4.5
   # for SVG render images
   flutter_svg: ^2.0.17
+  cached_network_image: ^3.4.1
+  # For Animation
+  shimmer: ^3.0.0
   # for adoptive screen and font size
   flutter_screenutil: ^5.9.3
 
