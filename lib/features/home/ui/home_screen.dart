@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
               verticalSpace(24.h),
               const DoctorSpeciality(),
               verticalSpace(18),
-              const SpecializationsAndDoctorsBlocBuilder(),
+              const Expanded(child: SpecializationsAndDoctorsBlocBuilder()),
             ],
           ),
         ),
@@ -34,3 +34,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+const double pi = 3.14;
