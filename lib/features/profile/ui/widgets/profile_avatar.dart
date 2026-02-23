@@ -20,7 +20,8 @@ class ProfileAvatar extends StatelessWidget {
               color: const Color(0xFFE8E4F7),
             ),
             child: ClipOval(
-              child: imageUrl != null && imageUrl!.isNotEmpty
+              child:
+                  imageUrl != null && imageUrl!.isNotEmpty
                   ? Image.network(
                       imageUrl!,
                       fit: BoxFit.cover,
