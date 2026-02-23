@@ -32,10 +32,11 @@ class LoginBlocListener extends StatelessWidget {
             );
           },
           success: (loginResponse) {
-            // Handle successful login
             context.pop();
-            context.pushNamed(Routes.homeScreen); // Close the loading dialog
-            // Navigate to the next screen or perform any other action
+            context.pushNamedAndRemoveUntil(
+              Routes.mainLayout,
+              predicate: (_) => false,
+            );
           },
           error: (error) {
             // Show error message

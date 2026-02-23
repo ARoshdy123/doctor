@@ -160,21 +160,9 @@ ApiErrorModel _handleError(DioException error) {
     case DioExceptionType.receiveTimeout:
       return DataSource.RECIEVE_TIMEOUT.getFailure();
     case DioExceptionType.badResponse:
-      if (error.response != null &&
-          error.response?.statusCode != null &&
-          error.response?.statusMessage != null) {
-        return ApiErrorModel.fromJson(error.response!.data);
-      } else {
-        return DataSource.DEFAULT.getFailure();
-      }
+      return _extractApiErrorFromResponse(error.response);
     case DioExceptionType.unknown:
-      if (error.response != null &&
-          error.response?.statusCode != null &&
-          error.response?.statusMessage != null) {
-        return ApiErrorModel.fromJson(error.response!.data);
-      } else {
-        return DataSource.DEFAULT.getFailure();
-      }
+      return _extractApiErrorFromResponse(error.response);
     case DioExceptionType.cancel:
       return DataSource.CANCEL.getFailure();
     case DioExceptionType.connectionError:
@@ -182,6 +170,74 @@ ApiErrorModel _handleError(DioException error) {
     case DioExceptionType.badCertificate:
       return DataSource.DEFAULT.getFailure();
   }
+}
+
+ApiErrorModel _extractApiErrorFromResponse(Response<dynamic>? response) {
+  final responseData = response?.data;
+  if (responseData is! Map<String, dynamic>) {
+    return DataSource.DEFAULT.getFailure();
+  }
+
+  final apiError = ApiErrorModel.fromJson(responseData);
+  final validationMessage = _extractValidationMessage(responseData);
+
+  return ApiErrorModel(
+    message: validationMessage ?? apiError.message ?? ResponseMessage.DEFAULT,
+    code: apiError.code ?? response?.statusCode ?? ResponseCode.DEFAULT,
+  );
+}
+
+String? _extractValidationMessage(Map<String, dynamic> payload) {
+  // Backend can return validation keys inside `errors` or `data`.
+  final containers = <dynamic>[payload['errors'], payload['data']];
+
+  for (final container in containers) {
+    final prioritizedMessage = _extractPrioritizedMessage(container);
+    if (prioritizedMessage != null) {
+      return prioritizedMessage;
+    }
+  }
+
+  return null;
+}
+
+String? _extractPrioritizedMessage(dynamic container) {
+  if (container is! Map) {
+    return null;
+  }
+
+  // UX priority: show the most actionable field error first.
+  const fieldPriority = ['email', 'phone', 'name', 'gender', 'password'];
+  for (final field in fieldPriority) {
+    final message = _extractFirstMessage(container[field]);
+    if (message != null) {
+      return message;
+    }
+  }
+
+  for (final value in container.values) {
+    final message = _extractFirstMessage(value);
+    if (message != null) {
+      return message;
+    }
+  }
+
+  return null;
+}
+
+String? _extractFirstMessage(dynamic value) {
+  if (value is List && value.isNotEmpty) {
+    final first = value.first;
+    if (first != null) {
+      return first.toString();
+    }
+  }
+
+  if (value is String && value.trim().isNotEmpty) {
+    return value;
+  }
+
+  return null;
 }
 
 class ApiInternalStatus {
