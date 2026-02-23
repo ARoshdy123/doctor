@@ -3,6 +3,7 @@ import 'package:doctor/core/theming/colors.dart';
 import 'package:doctor/core/theming/styles.dart';
 import 'package:flutter/material.dart';
 
+// won't use this for now, but will be used in the future when we add the password validation feature if UX needed
 class PasswordValidation extends StatelessWidget {
   final bool hasLowerCase;
   final bool hasUpperCase;

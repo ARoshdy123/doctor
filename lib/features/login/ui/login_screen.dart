@@ -1,5 +1,6 @@
 import 'package:doctor/core/helpers/responsive_helper.dart';
 import 'package:doctor/core/helpers/spacing.dart';
+import 'package:doctor/core/theming/colors.dart';
 import 'package:doctor/core/theming/styles.dart';
 import 'package:doctor/core/widgets/app_text_button.dart';
 import 'package:doctor/features/login/logic/cubit/login_cubit.dart';
@@ -19,8 +20,9 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30.rw, vertical: 30.rh),
+          padding: EdgeInsets.symmetric(horizontal: 24.rw, vertical: 20.rh),
           child: SingleChildScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -30,34 +32,44 @@ class LoginScreen extends StatelessWidget {
                   'We\'re excited to have you back, can\'t wait to see what you\'ve been up to since you last logged in.',
                   style: TextStyles.font14GrayRegular,
                 ),
-                verticalSpace(36),
-                Column(
+                verticalSpace(28),
+                const EmailAndPassword(),
+                verticalSpace(20),
+                Row(
                   children: [
-                    const EmailAndPassword(),
-
-                    verticalSpace(24),
-                    Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyles.font13BlueRegular,
+                    Expanded(
+                      child: AppTextButton(
+                        buttonText: 'Login',
+                        textStyle: TextStyles.font16WhiteSemiBold,
+                        onPressed: () {
+                          validateThenDoLogin(context);
+                        },
                       ),
                     ),
-                    verticalSpace(40),
-                    AppTextButton(
-                      buttonText: "Login",
-                      textStyle: TextStyles.font16WhiteSemiBold,
-                      onPressed: () {
-                        validateThenDoLogin(context);
-                      },
+                    horizontalSpace(8),
+                    Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: ColorsManager.lightBlue,
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: IconButton(
+                        tooltip: 'Login with fingerprint',
+                        onPressed: () {
+                          activateFingerprintLogin(context);
+                        },
+                        icon: const Icon(Icons.fingerprint),
+                        color: ColorsManager.mainBlue,
+                      ),
                     ),
-                    verticalSpace(16),
-                    const TermsAndConditionsText(),
-                    verticalSpace(60),
-                    const DontHaveAccountText(),
-                    const LoginBlocListener(),
                   ],
                 ),
+                verticalSpace(16),
+                const Center(child: TermsAndConditionsText()),
+                verticalSpace(28),
+                const Center(child: DontHaveAccountText()),
+                const LoginBlocListener(),
               ],
             ),
           ),
@@ -67,16 +79,18 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
+Future<void> activateFingerprintLogin(BuildContext context) async {
+  final message = await context.read<LoginCubit>().loginWithFingerprint();
+
+  if (message != null && context.mounted) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
+  }
+}
+
 void validateThenDoLogin(BuildContext context) {
   if (context.read<LoginCubit>().formKey.currentState!.validate()) {
     context.read<LoginCubit>().emitLoginState();
   }
 }
-// if (context.read<LoginCubit>().formKey.currentState!.validate()) {
-//   context.read<LoginCubit>().emitLoginState(
-//     LoginRequestBody(
-//       email: context.read<LoginCubit>().emailController.text,
-//       password: context.read<LoginCubit>().passwordController.text,
-//     ),
-//   );
-// }
