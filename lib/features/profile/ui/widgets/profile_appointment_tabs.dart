@@ -39,22 +39,24 @@ class _TabItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected ? Colors.white : Colors.transparent,
           borderRadius: BorderRadius.circular(10.r),
-          boxShadow: isSelected
-              ? [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.06),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  )
-                ]
-              : null,
+          boxShadow:
+              isSelected
+                  ? [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.06),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                  : null,
         ),
         child: Center(
           child: Text(
             label,
-            style: isSelected
-                ? TextStyles.font13DarkBlueMedium
-                : TextStyles.font13GrayRegular,
+            style:
+                isSelected
+                    ? TextStyles.font13DarkBlueMedium
+                    : TextStyles.font13GrayRegular,
           ),
         ),
       ),

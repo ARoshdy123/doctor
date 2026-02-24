@@ -37,9 +37,7 @@ class AppRouter {
               ),
         );
       case Routes.mainLayout:
-        return MaterialPageRoute(
-          builder: (_) => const MainLayoutScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const MainLayoutScreen());
 
       case Routes.homeScreen:
         return MaterialPageRoute(

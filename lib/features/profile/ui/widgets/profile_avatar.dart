@@ -22,20 +22,21 @@ class ProfileAvatar extends StatelessWidget {
             child: ClipOval(
               child:
                   imageUrl != null && imageUrl!.isNotEmpty
-                  ? Image.network(
-                      imageUrl!,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => const Icon(
+                      ? Image.network(
+                        imageUrl!,
+                        fit: BoxFit.cover,
+                        errorBuilder:
+                            (_, __, ___) => const Icon(
+                              Icons.person,
+                              size: 50,
+                              color: ColorsManager.gray,
+                            ),
+                      )
+                      : const Icon(
                         Icons.person,
                         size: 50,
                         color: ColorsManager.gray,
                       ),
-                    )
-                  : const Icon(
-                      Icons.person,
-                      size: 50,
-                      color: ColorsManager.gray,
-                    ),
             ),
           ),
           Positioned(

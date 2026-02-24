@@ -12,15 +12,9 @@ class ProfileNameAndEmail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          name ?? 'User',
-          style: TextStyles.font18DarkBlueBold,
-        ),
+        Text(name ?? 'User', style: TextStyles.font18DarkBlueBold),
         SizedBox(height: 4.h),
-        Text(
-          email ?? '',
-          style: TextStyles.font12GrayRegular,
-        ),
+        Text(email ?? '', style: TextStyles.font12GrayRegular),
       ],
     );
   }
