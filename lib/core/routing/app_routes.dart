@@ -4,6 +4,7 @@ import 'package:doctor/features/home/logic/home_cubit.dart';
 import 'package:doctor/features/home/ui/home_screen.dart';
 import 'package:doctor/features/login/logic/cubit/login_cubit.dart';
 import 'package:doctor/features/login/ui/login_screen.dart';
+import 'package:doctor/features/main_layout/ui/main_layout_screen.dart';
 import 'package:doctor/features/onboarding/onboarding_screen.dart';
 import 'package:doctor/features/sign_up/logic/cubit/sign_up_cubit.dart';
 import 'package:doctor/features/sign_up/ui/sign_up_screen.dart';
@@ -35,13 +36,14 @@ class AppRouter {
                 child: const SignupScreen(),
               ),
         );
-      case '/profile':
-      // return MaterialPageRoute(builder: (_) => ProfileScreen());
+      case Routes.mainLayout:
+        return MaterialPageRoute(builder: (_) => const MainLayoutScreen());
+
       case Routes.homeScreen:
         return MaterialPageRoute(
           builder:
               (_) => BlocProvider(
-                create: (context) => HomeCubit(getIt()..getSpecialization()),
+                create: (context) => getIt<HomeCubit>()..getSpecializations(),
                 child: const HomeScreen(),
               ),
         );

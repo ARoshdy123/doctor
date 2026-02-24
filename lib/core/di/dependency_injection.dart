@@ -2,9 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:doctor/core/networking/dio_factory.dart';
 import 'package:doctor/features/home/data/data_sources/home_api_service.dart';
 import 'package:doctor/features/home/data/repos/home_repo.dart';
+import 'package:doctor/features/home/logic/home_cubit.dart';
 import 'package:doctor/features/login/data/data_sources/login_api_service.dart';
 import 'package:doctor/features/login/data/repos/login_repo.dart';
 import 'package:doctor/features/login/logic/cubit/login_cubit.dart';
+import 'package:doctor/features/profile/data/data_sources/profile_api_service.dart';
+import 'package:doctor/features/profile/data/repos/profile_repo.dart';
+import 'package:doctor/features/profile/logic/cubit/logout_cubit.dart';
+import 'package:doctor/features/profile/logic/cubit/profile_cubit.dart';
 import 'package:doctor/features/sign_up/data/data_sources/sign_up_api_service.dart';
 import 'package:doctor/features/sign_up/data/repo/sign_up_repo.dart';
 import 'package:doctor/features/sign_up/logic/cubit/sign_up_cubit.dart';
@@ -32,5 +37,10 @@ Future<void> setupGetIt() async {
   //Home
   getIt.registerLazySingleton<HomeApiService>(() => HomeApiService(dio));
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
-  // getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
+  getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
+  //Profile
+  getIt.registerLazySingleton<ProfileApiService>(() => ProfileApiService(dio));
+  getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
+  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt()));
+  getIt.registerFactory<LogoutCubit>(() => LogoutCubit(getIt()));
 }
