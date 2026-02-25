@@ -18,10 +18,11 @@ class DoctorsListViewItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
-            child: Image.network(
+
+            child: Image.asset(
               width: 110.w,
               height: 120.h,
-              'https://static.wikia.nocookie.net/five-world-war/images/6/64/Hisoka.jpg/revision/latest?cb=20190313114050',
+              'assets/images/doc.png',
               fit: BoxFit.cover,
             ),
           ),

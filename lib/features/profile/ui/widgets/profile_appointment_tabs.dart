@@ -4,21 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileAppointmentTabs extends StatelessWidget {
-  const ProfileAppointmentTabs({super.key});
+  final VoidCallback? onAppointmentTap;
+  final VoidCallback? onMedicalIdTap;
+
+  const ProfileAppointmentTabs({
+    super.key,
+    this.onAppointmentTap,
+    this.onMedicalIdTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 24.h),
-      padding: EdgeInsets.all(4.r),
+      padding: EdgeInsets.all(5.r),
       decoration: BoxDecoration(
         color: ColorsManager.superLightGray2,
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(
         children: [
-          _TabItem(label: 'My Appointment', isSelected: true),
-          _TabItem(label: 'Medical records', isSelected: false),
+          _TabItem(label: 'My Appointment', onTap: onAppointmentTap),
+          SizedBox(width: 4.w),
+          _TabItem(label: 'Medical ID', onTap: onMedicalIdTap),
         ],
       ),
     );
@@ -27,36 +35,30 @@ class ProfileAppointmentTabs extends StatelessWidget {
 
 class _TabItem extends StatelessWidget {
   final String label;
-  final bool isSelected;
+  final VoidCallback? onTap;
 
-  const _TabItem({required this.label, required this.isSelected});
+  const _TabItem({required this.label, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10.h),
-        decoration: BoxDecoration(
-          color: isSelected ? Colors.white : Colors.transparent,
-          borderRadius: BorderRadius.circular(10.r),
-          boxShadow:
-              isSelected
-                  ? [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.06),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ]
-                  : null,
-        ),
-        child: Center(
-          child: Text(
-            label,
-            style:
-                isSelected
-                    ? TextStyles.font13DarkBlueMedium
-                    : TextStyles.font13GrayRegular,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.06),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Center(
+            child: Text(label, style: TextStyles.font13DarkBlueMedium),
           ),
         ),
       ),

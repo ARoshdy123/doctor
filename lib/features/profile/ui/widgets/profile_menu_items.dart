@@ -4,25 +4,34 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileMenuItems extends StatelessWidget {
   final VoidCallback? onLogout;
+  final VoidCallback? onPersonalInfo;
+  final VoidCallback? onMedicalId;
 
-  const ProfileMenuItems({super.key, this.onLogout});
+  const ProfileMenuItems({
+    super.key,
+    this.onLogout,
+    this.onPersonalInfo,
+    this.onMedicalId,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const _ProfileMenuItem(
+        _ProfileMenuItem(
           iconData: Icons.badge_outlined,
           label: 'Personal Information',
-          iconBgColor: Color(0xFFEAF2FF),
-          iconColor: Color(0xFF247CFF),
+          iconBgColor: const Color(0xFFEAF2FF),
+          iconColor: const Color(0xFF247CFF),
+          onTap: onPersonalInfo,
         ),
         const Divider(height: 1, indent: 16, endIndent: 16),
-        const _ProfileMenuItem(
-          iconData: Icons.science_outlined,
-          label: 'My Test & Diagnostic',
-          iconBgColor: Color(0xFFE8F5E9),
-          iconColor: Color(0xFF2ECC71),
+        _ProfileMenuItem(
+          iconData: Icons.medical_information_outlined,
+          label: 'Medical ID',
+          iconBgColor: const Color(0xFFE8F5E9),
+          iconColor: const Color(0xFF2ECC71),
+          onTap: onMedicalId,
         ),
         const Divider(height: 1, indent: 16, endIndent: 16),
         const _ProfileMenuItem(

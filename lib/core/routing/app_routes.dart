@@ -6,6 +6,10 @@ import 'package:doctor/features/login/logic/cubit/login_cubit.dart';
 import 'package:doctor/features/login/ui/login_screen.dart';
 import 'package:doctor/features/main_layout/ui/main_layout_screen.dart';
 import 'package:doctor/features/onboarding/onboarding_screen.dart';
+import 'package:doctor/features/profile/data/models/profile_response_model.dart';
+import 'package:doctor/features/profile/logic/cubit/update_profile_cubit.dart';
+import 'package:doctor/features/profile/ui/medical_id_screen.dart';
+import 'package:doctor/features/profile/ui/personal_information_screen.dart';
 import 'package:doctor/features/sign_up/logic/cubit/sign_up_cubit.dart';
 import 'package:doctor/features/sign_up/ui/sign_up_screen.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +51,19 @@ class AppRouter {
                 child: const HomeScreen(),
               ),
         );
+
+      case Routes.personalInformation:
+        final profileData = arguments as ProfileData?;
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create: (context) => getIt<UpdateProfileCubit>(),
+                child: PersonalInformationScreen(profileData: profileData),
+              ),
+        );
+
+      case Routes.medicalId:
+        return MaterialPageRoute(builder: (_) => const MedicalIdScreen());
 
       default:
         return null;

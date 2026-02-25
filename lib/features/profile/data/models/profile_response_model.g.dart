@@ -24,7 +24,7 @@ Map<String, dynamic> _$ProfileResponseModelToJson(
   'message': instance.message,
   'status': instance.status,
   'code': instance.code,
-  'data': instance.profileData?.map((e) => e.toJson()).toList(),
+  'data': instance.profileData,
 };
 
 ProfileData _$ProfileDataFromJson(Map<String, dynamic> json) => ProfileData(

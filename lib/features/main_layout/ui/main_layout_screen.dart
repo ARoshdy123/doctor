@@ -28,6 +28,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
       const _PlaceholderScreen(label: 'Appointments'),
       ProfileScreen(
         onBack: () => setState(() => _currentIndex = 0),
+        onNavigateToAppointments: () => setState(() => _currentIndex = 3),
       ),
     ];
     return MultiBlocProvider(
@@ -35,18 +36,11 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
         BlocProvider<HomeCubit>(
           create: (_) => getIt<HomeCubit>()..getSpecializations(),
         ),
-        BlocProvider<ProfileCubit>(
-          create: (_) => getIt<ProfileCubit>(),
-        ),
-        BlocProvider<LogoutCubit>(
-          create: (_) => getIt<LogoutCubit>(),
-        ),
+        BlocProvider<ProfileCubit>(create: (_) => getIt<ProfileCubit>()),
+        BlocProvider<LogoutCubit>(create: (_) => getIt<LogoutCubit>()),
       ],
       child: Scaffold(
-        body: IndexedStack(
-          index: _currentIndex,
-          children: pages,
-        ),
+        body: IndexedStack(index: _currentIndex, children: pages),
         floatingActionButton: FloatingActionButton(
           onPressed: () => setState(() => _currentIndex = 2),
           backgroundColor: ColorsManager.mainBlue,
@@ -108,11 +102,7 @@ class _BottomNavBar extends StatelessWidget {
               currentIndex: currentIndex,
               onTap: onTap,
             ),
-            _NavItemAvatar(
-              index: 4,
-              currentIndex: currentIndex,
-              onTap: onTap,
-            ),
+            _NavItemAvatar(index: 4, currentIndex: currentIndex, onTap: onTap),
           ],
         ),
       ),
@@ -237,9 +227,10 @@ class _NavItemAvatar extends StatelessWidget {
         width: 48.w,
         child: CircleAvatar(
           radius: 14.r,
-          backgroundColor: isSelected
-              ? ColorsManager.mainBlue
-              : ColorsManager.superLightGray2,
+          backgroundColor:
+              isSelected
+                  ? ColorsManager.mainBlue
+                  : ColorsManager.superLightGray2,
           child: Icon(
             Icons.person,
             size: 18.r,
@@ -259,9 +250,7 @@ class _PlaceholderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(label, style: const TextStyle(fontSize: 18)),
-      ),
+      body: Center(child: Text(label, style: const TextStyle(fontSize: 18))),
     );
   }
 }
