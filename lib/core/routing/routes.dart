@@ -6,4 +6,5 @@ class Routes {
   static const String mainLayout = '/mainLayout';
   static const String personalInformation = '/personalInformation';
   static const String medicalId = '/medicalId';
+  static const String doctorDetail = '/doctorDetail';
 }
