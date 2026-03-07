@@ -14,7 +14,7 @@ class DoctorLocationTab extends StatelessWidget {
   static const String _googleMapsUrl =
       'https://maps.app.goo.gl/mEwoDmHEv13v76tD9';
 
-  Future<void> _openGoogleMaps() async {
+  Future<void> openGoogleMaps() async {
     final uri = Uri.parse(_googleMapsUrl);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -50,7 +50,7 @@ class DoctorLocationTab extends StatelessWidget {
 
           // Tappable map placeholder
           GestureDetector(
-            onTap: _openGoogleMaps,
+            onTap: openGoogleMaps,
             child: Container(
               width: double.infinity,
               height: 200.h,

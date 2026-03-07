@@ -34,21 +34,38 @@ class DoctorAboutTab extends StatelessWidget {
           ),
           verticalSpace(24),
 
-          // STR
-          Text('STR', style: TextStyles.font18DarkBlueBold),
+          // Number
+          Text('Phone Number', style: TextStyles.font18DarkBlueBold),
           verticalSpace(12),
           Text(doctorData?.phone ?? 'N/A', style: TextStyles.font14GrayRegular),
           verticalSpace(24),
 
-          // Pengalaman Praktik
-          Text('Pengalaman Praktik', style: TextStyles.font18DarkBlueBold),
+          // Address
+          Text('Address', style: TextStyles.font18DarkBlueBold),
           verticalSpace(12),
           Text(
             doctorData?.address ?? 'N/A',
             style: TextStyles.font14GrayRegular,
           ),
-          verticalSpace(8),
-          Text(doctorData?.degree ?? '', style: TextStyles.font12GrayMedium),
+          verticalSpace(24),
+
+          // Booking price
+          Text('Price', style: TextStyles.font18DarkBlueBold),
+          verticalSpace(12),
+          Row(
+            children: [
+              Text(
+                '${doctorData?.appointPrice ?? 'N/A'}',
+                style: TextStyles.font14GrayRegular,
+              ),
+              horizontalSpace(4),
+              Image.asset(
+                'assets/images/symbol_grey.png',
+                width: 14.r,
+                height: 14.r,
+              ),
+            ],
+          ),
         ],
       ),
     );
