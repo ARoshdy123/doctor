@@ -34,5 +34,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-const double pi = 3.14;

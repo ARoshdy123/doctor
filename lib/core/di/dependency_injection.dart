@@ -10,6 +10,16 @@ import 'package:doctor/features/profile/data/data_sources/profile_api_service.da
 import 'package:doctor/features/profile/data/repos/profile_repo.dart';
 import 'package:doctor/features/profile/logic/cubit/logout_cubit.dart';
 import 'package:doctor/features/profile/logic/cubit/profile_cubit.dart';
+import 'package:doctor/features/profile/logic/cubit/update_profile_cubit.dart';
+import 'package:doctor/features/explore/data/data_sources/explore_api_service.dart';
+import 'package:doctor/features/explore/data/repos/explore_repo.dart';
+import 'package:doctor/features/explore/logic/explore_cubit.dart';
+import 'package:doctor/features/booking/data/data_sources/booking_api_service.dart';
+import 'package:doctor/features/booking/data/repos/appointment_repo.dart';
+import 'package:doctor/features/booking/logic/cubit/appointment_cubit.dart';
+import 'package:doctor/features/my_appointments/data/data_sources/my_appointments_api_service.dart';
+import 'package:doctor/features/my_appointments/data/repos/my_appointments_repo.dart';
+import 'package:doctor/features/my_appointments/logic/cubit/my_appointments_cubit.dart';
 import 'package:doctor/features/sign_up/data/data_sources/sign_up_api_service.dart';
 import 'package:doctor/features/sign_up/data/repo/sign_up_repo.dart';
 import 'package:doctor/features/sign_up/logic/cubit/sign_up_cubit.dart';
@@ -38,9 +48,28 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<HomeApiService>(() => HomeApiService(dio));
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepo(getIt()));
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt()));
+  //Explore
+  getIt.registerLazySingleton<ExploreApiService>(() => ExploreApiService(dio));
+  getIt.registerLazySingleton<ExploreRepo>(() => ExploreRepo(getIt()));
+  getIt.registerFactory<ExploreCubit>(() => ExploreCubit(getIt()));
   //Profile
   getIt.registerLazySingleton<ProfileApiService>(() => ProfileApiService(dio));
   getIt.registerLazySingleton<ProfileRepo>(() => ProfileRepo(getIt()));
   getIt.registerFactory<ProfileCubit>(() => ProfileCubit(getIt()));
   getIt.registerFactory<LogoutCubit>(() => LogoutCubit(getIt()));
+  getIt.registerFactory<UpdateProfileCubit>(() => UpdateProfileCubit(getIt()));
+  //Appointment
+  getIt.registerLazySingleton<BookingApiService>(() => BookingApiService(dio));
+  getIt.registerLazySingleton<AppointmentRepo>(() => AppointmentRepo(getIt()));
+  getIt.registerFactory<AppointmentCubit>(() => AppointmentCubit(getIt()));
+  //My Appointments
+  getIt.registerLazySingleton<MyAppointmentsApiService>(
+    () => MyAppointmentsApiService(dio),
+  );
+  getIt.registerLazySingleton<MyAppointmentsRepo>(
+    () => MyAppointmentsRepo(getIt()),
+  );
+  getIt.registerFactory<MyAppointmentsCubit>(
+    () => MyAppointmentsCubit(getIt()),
+  );
 }

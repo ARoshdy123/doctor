@@ -20,10 +20,9 @@ class ProfileTopBar extends StatelessWidget {
               size: 20,
             ),
           ),
-          const Spacer(),
+          const SizedBox(width: 112),
+
           Text('Profile', style: TextStyles.font18WhiteMedium),
-          const Spacer(),
-          const Icon(Icons.settings_outlined, color: Colors.white, size: 24),
         ],
       ),
     );
