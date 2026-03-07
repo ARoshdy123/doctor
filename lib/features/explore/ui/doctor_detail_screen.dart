@@ -99,7 +99,9 @@ class DoctorDetailScreen extends StatelessWidget {
               height: 50.h,
               child: ElevatedButton(
                 onPressed: () {
-                  // TODO: Navigate to appointment booking
+                  Navigator.of(
+                    context,
+                  ).pushNamed('/bookAppointment', arguments: doctorData);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ColorsManager.mainBlue,
