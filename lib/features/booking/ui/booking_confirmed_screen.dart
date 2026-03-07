@@ -46,7 +46,6 @@ class BookingConfirmedScreen extends StatelessWidget {
         child: Column(
           children: [
             verticalSpace(24),
-
             // ── Green Checkmark ──
             Container(
               width: 80.r,

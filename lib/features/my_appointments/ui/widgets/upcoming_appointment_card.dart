@@ -101,30 +101,31 @@ class UpcomingAppointmentCard extends StatelessWidget {
                   onPressed: () {
                     showDialog(
                       context: context,
-                      builder: (_) => AlertDialog(
-                        title: const Text('Cancel Appointment'),
-                        content: const Text(
-                          'Are you sure you want to cancel this appointment?',
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text('No'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              context
-                                  .read<MyAppointmentsCubit>()
-                                  .cancelAppointment(appointment);
-                            },
-                            child: Text(
-                              'Yes, Cancel',
-                              style: TextStyle(color: ColorsManager.red),
+                      builder:
+                          (_) => AlertDialog(
+                            title: const Text('Cancel Appointment'),
+                            content: const Text(
+                              'Are you sure you want to cancel this appointment?',
                             ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('No'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  context
+                                      .read<MyAppointmentsCubit>()
+                                      .cancelAppointment(appointment);
+                                },
+                                child: Text(
+                                  'Yes, Cancel',
+                                  style: TextStyle(color: ColorsManager.red),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
                     );
                   },
                   style: OutlinedButton.styleFrom(

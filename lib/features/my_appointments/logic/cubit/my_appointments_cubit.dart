@@ -16,11 +16,12 @@ class MyAppointmentsCubit extends Cubit<MyAppointmentsState> {
     final result = await _repo.getAppointments();
     result.when(
       success: (data) => emit(MyAppointmentsState.success(data)),
-      failure: (err) => emit(
-        MyAppointmentsState.error(
-          err.apiErrorModel.message ?? 'Something went wrong',
-        ),
-      ),
+      failure:
+          (err) => emit(
+            MyAppointmentsState.error(
+              err.apiErrorModel.message ?? 'Something went wrong',
+            ),
+          ),
     );
   }
 
@@ -54,10 +55,11 @@ class MyAppointmentsCubit extends Cubit<MyAppointmentsState> {
   }
 
   List<AppointmentItem> getCompleted(List<AppointmentItem?> all) {
-    final real = all
-        .whereType<AppointmentItem>()
-        .where((a) => a.status == 'completed')
-        .toList();
+    final real =
+        all
+            .whereType<AppointmentItem>()
+            .where((a) => a.status == 'completed')
+            .toList();
     if (real.isNotEmpty) return real;
     // Return 2 dummy items when no completed appointments in response
     return _dummyCompleted;
