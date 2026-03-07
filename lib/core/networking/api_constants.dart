@@ -10,6 +10,8 @@ class ApiConstants {
   static const String showSpecializationEndpoint = 'specialization/show/1';
   static const String getDoctorsEndpoint = 'doctor/index';
   static const String searchDoctorEndpoint = 'doctor/doctor-search';
+  static const String makeAppointmentEndpoint = 'appointment/store';
+  static const String getAppointmentsEndpoint = 'appointment/index';
 }
 
 class ApiErrors {

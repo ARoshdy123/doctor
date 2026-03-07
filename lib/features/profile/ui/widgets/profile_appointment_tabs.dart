@@ -19,7 +19,7 @@ class ProfileAppointmentTabs extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 24.h),
       padding: EdgeInsets.all(5.r),
       decoration: BoxDecoration(
-        color: ColorsManager.superLightGray2,
+        color: ColorsManager.superLightGray,
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: Row(

@@ -7,4 +7,9 @@ class Routes {
   static const String personalInformation = '/personalInformation';
   static const String medicalId = '/medicalId';
   static const String doctorDetail = '/doctorDetail';
+  static const String bookAppointment = '/bookAppointment';
+  static const String bookingConfirmed = '/bookingConfirmed';
+  static const String myAppointments = '/myAppointments';
+  static const String rescheduleAppointment = '/rescheduleAppointment';
+  static const String rescheduledConfirmed = '/rescheduledConfirmed';
 }

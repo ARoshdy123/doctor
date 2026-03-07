@@ -12,6 +12,12 @@ import 'package:doctor/features/profile/data/models/profile_response_model.dart'
 import 'package:doctor/features/profile/logic/cubit/update_profile_cubit.dart';
 import 'package:doctor/features/profile/ui/medical_id_screen.dart';
 import 'package:doctor/features/profile/ui/personal_information_screen.dart';
+import 'package:doctor/features/booking/logic/cubit/appointment_cubit.dart';
+import 'package:doctor/features/booking/ui/book_appointment_screen.dart';
+import 'package:doctor/features/booking/ui/booking_confirmed_screen.dart';
+import 'package:doctor/features/my_appointments/data/models/appointments_list_response_model.dart';
+import 'package:doctor/features/my_appointments/ui/reschedule_screen.dart';
+import 'package:doctor/features/my_appointments/ui/rescheduled_confirmed_screen.dart';
 import 'package:doctor/features/sign_up/logic/cubit/sign_up_cubit.dart';
 import 'package:doctor/features/sign_up/ui/sign_up_screen.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +49,10 @@ class AppRouter {
               ),
         );
       case Routes.mainLayout:
-        return MaterialPageRoute(builder: (_) => const MainLayoutScreen());
+        final initialTab = arguments is int ? arguments : 0;
+        return MaterialPageRoute(
+          builder: (_) => MainLayoutScreen(initialTabIndex: initialTab),
+        );
 
       case Routes.homeScreen:
         return MaterialPageRoute(
@@ -71,6 +80,38 @@ class AppRouter {
         final doctorData = arguments as DoctorData?;
         return MaterialPageRoute(
           builder: (_) => DoctorDetailScreen(doctorData: doctorData),
+        );
+
+      case Routes.bookAppointment:
+        final doctorData = arguments as DoctorData?;
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create: (_) => getIt<AppointmentCubit>(),
+                child: BookAppointmentScreen(doctorData: doctorData),
+              ),
+        );
+
+      case Routes.bookingConfirmed:
+        final cubit = arguments as AppointmentCubit;
+        return MaterialPageRoute(
+          builder: (_) => BookingConfirmedScreen(cubit: cubit),
+        );
+
+      case Routes.rescheduleAppointment:
+        final appointment = arguments as AppointmentItem;
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create: (_) => getIt<AppointmentCubit>(),
+                child: RescheduleScreen(appointment: appointment),
+              ),
+        );
+
+      case Routes.rescheduledConfirmed:
+        final cubit = arguments as AppointmentCubit;
+        return MaterialPageRoute(
+          builder: (_) => RescheduledConfirmedScreen(cubit: cubit),
         );
 
       default:
