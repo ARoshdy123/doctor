@@ -2,6 +2,7 @@ import 'package:doctor/core/networking/api_error_handler.dart';
 import 'package:doctor/core/networking/api_result.dart';
 import 'package:doctor/features/explore/data/data_sources/explore_api_service.dart';
 import 'package:doctor/features/explore/data/models/all_doctors_response_model.dart';
+import 'package:doctor/features/home/data/models/specializations_response_model.dart';
 
 class ExploreRepo {
   final ExploreApiService _exploreApiService;
@@ -20,6 +21,26 @@ class ExploreRepo {
   Future<ApiResult<AllDoctorsResponseModel>> searchDoctors(String name) async {
     try {
       final response = await _exploreApiService.searchDoctors(name);
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<AllDoctorsResponseModel>> filterDoctors(
+    int specializationId,
+  ) async {
+    try {
+      final response = await _exploreApiService.filterDoctors(specializationId);
+      return ApiResult.success(response);
+    } catch (error) {
+      return ApiResult.failure(ErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<SpecializationsResponseModel>> getSpecializations() async {
+    try {
+      final response = await _exploreApiService.getSpecializations();
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));
