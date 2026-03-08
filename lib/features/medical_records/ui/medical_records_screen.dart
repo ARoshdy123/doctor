@@ -27,10 +27,7 @@ class MedicalRecordsScreen extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
           ),
           centerTitle: true,
-          title: Text(
-            'Medical Records',
-            style: TextStyles.font18DarkBlueBold,
-          ),
+          title: Text('Medical Records', style: TextStyles.font18DarkBlueBold),
           bottom: TabBar(
             labelColor: ColorsManager.darkBlue,
             unselectedLabelColor: ColorsManager.gray,

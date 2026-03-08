@@ -66,10 +66,7 @@ class MedicalRecordCard extends StatelessWidget {
                   },
                   style: OutlinedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 12.h),
-                    side: BorderSide(
-                      color: ColorsManager.darkBlue,
-                      width: 1.2,
-                    ),
+                    side: BorderSide(color: ColorsManager.darkBlue, width: 1.2),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24.r),
                     ),
@@ -88,7 +85,8 @@ class MedicalRecordCard extends StatelessWidget {
                       final data = await rootBundle.load(record.pdfAssetPath);
                       final fileName = record.pdfAssetPath.split('/').last;
 
-                      final dir = await getExternalStorageDirectory() ??
+                      final dir =
+                          await getExternalStorageDirectory() ??
                           await getApplicationDocumentsDirectory();
 
                       final downloadsDir = Directory('${dir.path}/Downloads');
@@ -121,7 +119,12 @@ class MedicalRecordCard extends StatelessWidget {
                     }
                   },
                   icon: Icon(Icons.download, size: 18.r, color: Colors.white),
-                  label: Text('Download', style: TextStyles.font14DarkBlueMedium.copyWith(color: Colors.white)),
+                  label: Text(
+                    'Download',
+                    style: TextStyles.font14DarkBlueMedium.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorsManager.mainBlue,
                     padding: EdgeInsets.symmetric(vertical: 12.h),

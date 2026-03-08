@@ -54,7 +54,8 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
       final data = await rootBundle.load(widget.assetPath);
       final fileName = widget.assetPath.split('/').last;
 
-      final dir = await getExternalStorageDirectory() ??
+      final dir =
+          await getExternalStorageDirectory() ??
           await getApplicationDocumentsDirectory();
 
       final downloadsDir = Directory('${dir.path}/Downloads');
@@ -104,27 +105,23 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
         title: Text(widget.title, style: TextStyles.font18DarkBlueSemiBold),
         actions: [
           IconButton(
-            icon: const Icon(
-              Icons.download,
-              color: ColorsManager.mainBlue,
-            ),
+            icon: const Icon(Icons.download, color: ColorsManager.mainBlue),
             onPressed: _downloadPdf,
           ),
         ],
       ),
-      body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(
-                color: ColorsManager.mainBlue,
+      body:
+          _isLoading
+              ? const Center(
+                child: CircularProgressIndicator(color: ColorsManager.mainBlue),
+              )
+              : PDFView(
+                filePath: _localPath!,
+                enableSwipe: true,
+                swipeHorizontal: false,
+                autoSpacing: true,
+                pageFling: true,
               ),
-            )
-          : PDFView(
-              filePath: _localPath!,
-              enableSwipe: true,
-              swipeHorizontal: false,
-              autoSpacing: true,
-              pageFling: true,
-            ),
     );
   }
 }

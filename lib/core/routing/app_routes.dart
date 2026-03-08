@@ -117,18 +117,17 @@ class AppRouter {
         );
 
       case Routes.medicalRecords:
-        return MaterialPageRoute(
-          builder: (_) => const MedicalRecordsScreen(),
-        );
+        return MaterialPageRoute(builder: (_) => const MedicalRecordsScreen());
 
       case Routes.pdfViewer:
         final args = arguments as Map<String, dynamic>;
         return MaterialPageRoute(
-          builder: (_) => PdfViewerScreen(
-            title: args['title'] as String,
-            assetPath: args['assetPath'] as String,
-            triggerDownload: args['download'] as bool? ?? false,
-          ),
+          builder:
+              (_) => PdfViewerScreen(
+                title: args['title'] as String,
+                assetPath: args['assetPath'] as String,
+                triggerDownload: args['download'] as bool? ?? false,
+              ),
         );
 
       default:
