@@ -59,43 +59,44 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           verticalSpace(12),
           _isLoading
               ? SizedBox(
-                  height: 40.h,
-                  child: const Center(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: ColorsManager.mainBlue,
-                    ),
-                  ),
-                )
-              : SizedBox(
-                  height: 40.h,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: specializations.length + 1,
-                    itemBuilder: (context, index) {
-                      if (index == 0) {
-                        final isSelected = _selectedSpecializationId == null;
-                        return _buildChip(
-                          label: 'All',
-                          isSelected: isSelected,
-                          onTap: () => setState(
-                            () => _selectedSpecializationId = null,
-                          ),
-                        );
-                      }
-                      final spec = specializations[index - 1];
-                      final isSelected =
-                          _selectedSpecializationId == spec?.id;
-                      return _buildChip(
-                        label: spec?.name ?? '',
-                        isSelected: isSelected,
-                        onTap: () => setState(
-                          () => _selectedSpecializationId = spec?.id,
-                        ),
-                      );
-                    },
+                height: 40.h,
+                child: const Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: ColorsManager.mainBlue,
                   ),
                 ),
+              )
+              : SizedBox(
+                height: 40.h,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: specializations.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      final isSelected = _selectedSpecializationId == null;
+                      return _buildChip(
+                        label: 'All',
+                        isSelected: isSelected,
+                        onTap:
+                            () => setState(
+                              () => _selectedSpecializationId = null,
+                            ),
+                      );
+                    }
+                    final spec = specializations[index - 1];
+                    final isSelected = _selectedSpecializationId == spec?.id;
+                    return _buildChip(
+                      label: spec?.name ?? '',
+                      isSelected: isSelected,
+                      onTap:
+                          () => setState(
+                            () => _selectedSpecializationId = spec?.id,
+                          ),
+                    );
+                  },
+                ),
+              ),
           verticalSpace(32),
           SizedBox(
             width: double.infinity,
@@ -139,16 +140,20 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
             color: isSelected ? ColorsManager.mainBlue : Colors.white,
             borderRadius: BorderRadius.circular(24.r),
             border: Border.all(
-              color: isSelected
-                  ? ColorsManager.mainBlue
-                  : ColorsManager.lighterGray,
+              color:
+                  isSelected
+                      ? ColorsManager.mainBlue
+                      : ColorsManager.lighterGray,
             ),
           ),
           child: Text(
             label,
-            style: isSelected
-                ? TextStyles.font14DarkBlueMedium.copyWith(color: Colors.white)
-                : TextStyles.font14GrayRegular,
+            style:
+                isSelected
+                    ? TextStyles.font14DarkBlueMedium.copyWith(
+                      color: Colors.white,
+                    )
+                    : TextStyles.font14GrayRegular,
           ),
         ),
       ),

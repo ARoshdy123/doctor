@@ -31,9 +31,7 @@ class ExploreRepo {
     int specializationId,
   ) async {
     try {
-      final response = await _exploreApiService.filterDoctors(
-        specializationId,
-      );
+      final response = await _exploreApiService.filterDoctors(specializationId);
       return ApiResult.success(response);
     } catch (error) {
       return ApiResult.failure(ErrorHandler.handle(error));

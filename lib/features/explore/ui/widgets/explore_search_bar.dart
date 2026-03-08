@@ -21,21 +21,30 @@ class ExploreSearchBar extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'Search',
               hintStyle: TextStyles.font14LightGrayRegular,
-              prefixIcon:
-                  Icon(Icons.search, color: ColorsManager.gray, size: 22.r),
+              prefixIcon: Icon(
+                Icons.search,
+                color: ColorsManager.gray,
+                size: 22.r,
+              ),
               filled: true,
               fillColor: ColorsManager.superLightGray,
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 16.w,
+                vertical: 14.h,
+              ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16.r),
-                borderSide:
-                    BorderSide(color: ColorsManager.lighterGray, width: 1.3),
+                borderSide: BorderSide(
+                  color: ColorsManager.lighterGray,
+                  width: 1.3,
+                ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16.r),
-                borderSide:
-                    BorderSide(color: ColorsManager.mainBlue, width: 1.3),
+                borderSide: BorderSide(
+                  color: ColorsManager.mainBlue,
+                  width: 1.3,
+                ),
               ),
             ),
             style: TextStyles.font14DarkBlueMedium,
@@ -48,10 +57,11 @@ class ExploreSearchBar extends StatelessWidget {
               context: context,
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
-              builder: (_) => BlocProvider.value(
-                value: context.read<ExploreCubit>(),
-                child: const FilterBottomSheet(),
-              ),
+              builder:
+                  (_) => BlocProvider.value(
+                    value: context.read<ExploreCubit>(),
+                    child: const FilterBottomSheet(),
+                  ),
             );
           },
           child: Container(
@@ -59,16 +69,9 @@ class ExploreSearchBar extends StatelessWidget {
             decoration: BoxDecoration(
               color: ColorsManager.superLightGray,
               borderRadius: BorderRadius.circular(12.r),
-              border: Border.all(
-                color: ColorsManager.lighterGray,
-                width: 1.3,
-              ),
+              border: Border.all(color: ColorsManager.lighterGray, width: 1.3),
             ),
-            child: Icon(
-              Icons.tune,
-              color: ColorsManager.gray,
-              size: 22.r,
-            ),
+            child: Icon(Icons.tune, color: ColorsManager.gray, size: 22.r),
           ),
         ),
       ],
