@@ -1,7 +1,10 @@
+import 'package:doctor/core/helpers/doctor_image_helper.dart';
+import 'package:doctor/features/explore/logic/explore_cubit.dart';
 import 'package:doctor/features/home/data/models/specializations_response_model.dart';
+import 'package:doctor/features/main_layout/logic/main_layout_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/helpers/spacing.dart';
 import '../../../../core/theming/colors.dart';
@@ -21,23 +24,32 @@ class DoctorsSpecialityListViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsetsDirectional.only(start: itemIndex == 0 ? 0 : 24.w),
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 28,
-            backgroundColor: ColorsManager.lightBlue,
-            child: SvgPicture.asset(
-              'assets/svgs/general_speciality.svg',
-              height: 40.h,
-              width: 40.w,
+      child: GestureDetector(
+        onTap: () {
+          final specId = specializationsData?.id;
+          if (specId != null) {
+            context.read<ExploreCubit>().filterDoctors(specId);
+            context.read<MainLayoutCubit>().goToTab(1);
+          }
+        },
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 28,
+              backgroundColor: ColorsManager.lightBlue,
+              child: Image.asset(
+                getSpecialtyImage(specializationsData?.id),
+                height: 40.h,
+                width: 40.w,
+              ),
             ),
-          ),
-          verticalSpace(8),
-          Text(
-            specializationsData?.name ?? 'Specialization',
-            style: TextStyles.font12DarkBlueRegular,
-          ),
-        ],
+            verticalSpace(8),
+            Text(
+              specializationsData?.name ?? 'Specialization',
+              style: TextStyles.font12DarkBlueRegular,
+            ),
+          ],
+        ),
       ),
     );
   }
